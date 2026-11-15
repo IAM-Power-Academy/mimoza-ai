@@ -16,21 +16,9 @@
     notifyUrl: ""
   };
 
-  var OFFERS = "Paketat aktuale në iampower.al (çmimi i ofertës sipas faqes, në kllapa çmimi normal):\n\n" +
-    "PAKOT KRYESORE\n" +
-    "• Pako 1: Paratë Rrjedhin, 20 € (normal 29 €), qasje 5 vjet\nhttps://iampower.al/product/parate-rrjedhin/\n\n" +
-    "• Pako 2: Masterclass IAM Power, 69 € (normal 99 €), qasje 1 vit, Zoom live 2 herë në muaj me Mimozën\nhttps://iampower.al/product/masterclass-iam-power/\n\n" +
-    "• Pako 3: 40 Ditë Çlirim Shpirtëror, 105 € (normal 150 €), 40 ditë + 5 vjet qasje\nhttps://iampower.al/product/40-dite-clirim-shpirteror/\n\n" +
-    "PAKOT E THELLA\n" +
-    "• Fuqia Brenda Teje, 240 € (normal 349 €), 18 kurse\nhttps://iampower.al/product/fuqia-brenda-teje/\n\n" +
-    "• Qetësia e Shpirtit, 275 € (normal 397 €), 16 kurse\nhttps://iampower.al/product/qetesia-e-shpirtit/\n\n" +
-    "• Biznesi Yt, 485 € (normal 697 €), 10 kurse\nhttps://iampower.al/product/biznesi-yt/\n\n" +
-    "CERTIFIKIM\n" +
-    "• Life Coach i Certifikuar · Porta 01, 720 € (normal 800 €)\nhttps://iampower.al/product/life-coach-i-certifikuar-%c2%b7-porta-01/\n\n" +
-    "• Arkitekti i Universit 1:1 me Mimozën, nga 1,200 €, vetëm me aplikim\nhttps://iampower.al/aplikim-arkitekti-i-universit/\n" +
-    "Bonus 27–29 nëntor: kush pranohet merr falas Life Coach i Certifikuar (vlerë 800 €). Vetëm 10 vende.\n\n" +
-    "FALAS: Niveli 0 dhe një meditim.\n\n" +
-    "Më trego çfarë po të bllokon tani, dhe të them cila paketë të përshtatet.";
+  var OFFERS = "Në vend që të ta radhis të gjitha, më mirë të propozoj një kurs që të përshtatet vërtet. Më thuaj: çfarë po të bllokon ose çfarë dëshiron të ndryshosh tani (para, emocione, vetëbesim, qetësi, biznes apo certifikim)?\n\n" +
+    "Nëse do të nisësh me diçka të vogël sot, Pako 1 \"Paratë Rrjedhin\" ka çmim oferte 20 € (normal 29 €), qasje 5 vjet:\nhttps://iampower.al/product/parate-rrjedhin/\n\n" +
+    "Listën e plotë të ofertave e sheh te https://iampower.al/#pakot";
 
   var REGISTER = "Si blihet hap pas hapi:\n\n" +
     "1. Zgjidh paketën (shih ofertat) dhe hape faqen e saj.\n" +
@@ -106,7 +94,7 @@
     who: "Jam Mimoza AI, asistentja virtuale e IAM Power Academy. Nuk jam Mimoza personalisht, por të ndihmoj të gjesh paketën e duhur dhe të lidh me skuadrën për çdo gjë tjetër.",
     hi: "Përshëndetje! Çfarë po kërkon ose çfarë dëshiron të ndryshosh tani?",
     thx: "Me kënaqësi! Nëse ke ndonjë pyetje tjetër, jam këtu.",
-    info: "Me kënaqësi! IAM Power ka pako sipas asaj që do të ndryshosh:\n• Para e bollëk: Paratë Rrjedhin (ofertë 20 €)\n• Emocione e mendime: Masterclass IAM Power (ofertë 69 €) ose 40 Ditë Çlirim Shpirtëror (ofertë 105 €)\n• Vetëbesim: Fuqia Brenda Teje (ofertë 240 €)\n• Qetësi e shërim i brendshëm: Qetësia e Shpirtit (ofertë 275 €)\n• Biznes: Biznesi Yt (ofertë 485 €)\n• Certifikim: Life Coach i Certifikuar (ofertë 720 €)\n• Puna 1:1 me Mimozën: Arkitekti i Universit (nga 1,200 €, me aplikim)\n\nTregomë çfarë po të bllokon ose çfarë dëshiron të ndryshosh tani, dhe të them cila të përshtatet më mirë."
+    info: "Me kënaqësi! Tregomë me fjalët e tua çfarë po të bllokon ose çfarë dëshiron të ndryshosh tani (para, emocione, vetëbesim, qetësi, biznes, certifikim), dhe të propozoj një kurs që të përshtatet."
   };
   var RULES = [
     [/k[eë]st|me rata|paguaj.*pjes|pjes[eë]-pjes[eë]/i, "TEAM"],
@@ -187,7 +175,7 @@
     if (CRISIS_RE.test(text)) { bot(CRISIS); return; }
     if (SENSITIVE_RE.test(text)) { botT(NOTICE); return; }
     var exact = smart(text);
-    if (CONFIG.endpoint && (exact === OFFERS || exact === REGISTER || exact === FREE || exact === TEAM || exact === P.info)) {
+    if (CONFIG.endpoint && (exact !== OFFERS || text.length < 40) && (exact === OFFERS || exact === REGISTER || exact === FREE || exact === TEAM || exact === P.info)) {
       if (exact === TEAM) bot(TEAM); else botT(exact);
       return;
     }
