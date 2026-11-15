@@ -105,11 +105,12 @@
     live: "Zoom live me Mimozën dy herë në muaj përfshihet te Pako 2 \"Masterclass IAM Power\". Datat e sakta nuk i kam të publikuara, prandaj skuadra të tregon kur është takimi i radhës.",
     who: "Jam Mimoza AI, asistentja virtuale e IAM Power Academy. Nuk jam Mimoza personalisht, por të ndihmoj të gjesh paketën e duhur dhe të lidh me skuadrën për çdo gjë tjetër.",
     hi: "Përshëndetje! Çfarë po kërkon ose çfarë dëshiron të ndryshosh tani?",
-    thx: "Me kënaqësi! Nëse ke ndonjë pyetje tjetër, jam këtu."
+    thx: "Me kënaqësi! Nëse ke ndonjë pyetje tjetër, jam këtu.",
+    info: "Me kënaqësi! IAM Power ka pako sipas asaj që do të ndryshosh:\n• Para e bollëk: Paratë Rrjedhin (ofertë 20 €)\n• Emocione e mendime: Masterclass IAM Power (ofertë 69 €) ose 40 Ditë Çlirim Shpirtëror (ofertë 105 €)\n• Vetëbesim: Fuqia Brenda Teje (ofertë 240 €)\n• Qetësi e shërim i brendshëm: Qetësia e Shpirtit (ofertë 275 €)\n• Biznes: Biznesi Yt (ofertë 485 €)\n• Certifikim: Life Coach i Certifikuar (ofertë 720 €)\n• Puna 1:1 me Mimozën: Arkitekti i Universit (nga 1,200 €, me aplikim)\n\nTregomë çfarë po të bllokon ose çfarë dëshiron të ndryshosh tani, dhe të them cila të përshtatet më mirë."
   };
   var RULES = [
     [/k[eë]st|me rata|paguaj.*pjes|pjes[eë]-pjes[eë]/i, "TEAM"],
-    [/cmim|sa kushton|kushtoj|oferte|black friday|paket|kurset/, "OFFERS"],
+    [/cmim|sa kushton|kushtoj|ofert|zbritj|black friday|paket|kurset|aktual/, "OFFERS"],
     [/regjistr|si blej|si e blej|si paguaj|blej|bli /, "REGISTER"],
     [/falas|pa pages|provoj|prove/, "FREE"],
     [/\bpara\b|parat|borxh|financ|pasur|te ardhura|rrjedh/, P.money],
@@ -123,7 +124,8 @@
     [/zoom|live|takim/, P.live],
     [/kush je|je robot|je njeri|je ai\b|je vertet/, P.who],
     [/^(pershendetje|tung|miredita|mirdita|mire\b|hello|hi\b|hey)/, P.hi],
-    [/faleminderit|rrofsh|flm|thx/, P.thx]
+    [/faleminderit|rrofsh|flm|thx/, P.thx],
+    [/\binfo|informacion|ndihm|me trego|shpjego|cfare ofron|çfare ofron|ju ofroni|per cfare/, P.info]
   ];
   function norm(t) { return t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
   function smart(text) {
@@ -185,7 +187,7 @@
     if (CRISIS_RE.test(text)) { bot(CRISIS); return; }
     if (SENSITIVE_RE.test(text)) { botT(NOTICE); return; }
     var exact = smart(text);
-    if (CONFIG.endpoint && (exact === OFFERS || exact === REGISTER || exact === FREE || exact === TEAM)) {
+    if (CONFIG.endpoint && (exact === OFFERS || exact === REGISTER || exact === FREE || exact === TEAM || exact === P.info)) {
       if (exact === TEAM) bot(TEAM); else botT(exact);
       return;
     }
@@ -195,11 +197,23 @@
       return;
     }
     var wait = document.createElement("div"); wait.className = "mz-m mz-b"; wait.textContent = "…"; msgs.appendChild(wait);
-    fetch(CONFIG.endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history.slice(-12), nextMember: convMember() }) })
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
+    function soft() {
+      var local = smart(text);
+      if (local === TEAM) { bot(TEAM); return; }
+      if (local) { botT(local); return; }
+      botT("Po më vonon pak lidhja tani. Provo ta shkruash edhe një herë, ose shtyp një nga butonat më poshtë, p.sh. \"Ofertat aktuale\" ose \"Gjej paketën për mua\".");
+    }
+    function call(tries) {
+      var ctl = (typeof AbortController !== "undefined") ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 28000);
+      return fetch(CONFIG.endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, signal: ctl ? ctl.signal : undefined, body: JSON.stringify({ messages: history.slice(-12), nextMember: convMember() }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { clearTimeout(timer); if (d && d.reply) return d; throw new Error("no reply"); })
+        .catch(function (e) { clearTimeout(timer); if (tries > 0) return call(tries - 1); throw e; });
+    }
+    call(1).then(function (d) {
         wait.remove();
-        var reply = (d && d.reply) || fallback();
+        var reply = d.reply;
         if (reply.indexOf("[LIDH_ME_SKUADREN]") > -1) {
           reply = reply.replace("[LIDH_ME_SKUADREN]", "").trim();
         }
@@ -211,7 +225,7 @@
         }
         botT(reply);
       })
-      .catch(function () { wait.remove(); bot(fallback()); });
+      .catch(function () { wait.remove(); soft(); });
   }
 
   function open() {
