@@ -73,6 +73,18 @@
     return "Këtë pyetje po ta lidh menjëherë me " + m.name + " nga skuadra jonë, që të përgjigjet saktë:\n" + m.phone + "\n" + m.wa;
   }
 
+  // Tema të ndjeshme shëndetësore: gjithmonë njoftim i qartë, pa shitje dhe pa rrotullim te skuadra.
+  var CRISIS_RE = /vetëvra|vetevra|vetëlënd|vetelend|dua t[eë] vdes|mos jetoj|t[eë] mbyt veten|mbyt veten/i;
+  var SENSITIVE_RE = /depresion|ankth|ankthi|panik|trauma|çrregullim|crregullim|mendor|psikik|psikolog|psikiatr|dëshpër|deshper|stres i r[eë]nd|burnout/i;
+  var NOTICE = "Të falënderoj që e ndave këtë me mua.\n\n" +
+    "Së pari, siç kërkon ligji: IAM Power nuk është shërbim mjekësor apo psikologjik. Nuk bën diagnoza, nuk trajton çrregullime dhe nuk zëvendëson mjekun, psikologun ose psikiatrin.\n\n" +
+    "IAM Power është ndihmë për zhvillim personal. Sipas udhëzimeve përkatëse të psikologut, ajo mund të jetë vetëm një ndihmë shtesë në këtë rrugëtim, jo zgjidhja kryesore. Nëse ke diagnozë ose je në trajtim, ndiq udhëzimet e specialistit tënd.\n\n" +
+    "Nëse ndihesh keq ose gjendja po të rëndohet, flit sa më shpejt me mjekun ose psikologun tënd. Në rast urgjence telefono 112.\n\n" +
+    "Nëse dëshiron, të tregoj diçka falas për zhvillim personal, ose të lidh me ekipin për pyetje.";
+  var CRISIS = "Më vjen keq që po kalon kaq vështirë, dhe mirë që e the. Shëndeti dhe siguria jote vijnë para çdo gjëje tjetër.\n\n" +
+    "Të lutem telefono tani 112 (urgjenca) ose shko te mjeku më i afërt, dhe thuaji një personi të afërt që të rrijë me ty. Mos qëndro vetëm.\n\n" +
+    "IAM Power nuk është shërbim mjekësor apo psikologjik dhe nuk mund ta zëvendësojë ndihmën urgjente profesionale.";
+
   var root = document.getElementById("mz-root");
   root.innerHTML =
     '<button id="mz-btn">Fol me Mimozën AI</button>' +
@@ -117,6 +129,8 @@
 
   function ask(text) {
     add("user", text); history.push({ role: "user", content: text });
+    if (CRISIS_RE.test(text)) { bot(CRISIS); return; }
+    if (SENSITIVE_RE.test(text)) { bot(NOTICE); return; }
     if (!CONFIG.endpoint) { bot(/k[eë]st|me rata|paguaj.*pjes/i.test(text) ? TEAM : fallback()); return; }
     var wait = document.createElement("div"); wait.className = "mz-m mz-b"; wait.textContent = "…"; msgs.appendChild(wait);
     fetch(CONFIG.endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history.slice(-12), nextMember: MEMBERS[turn % MEMBERS.length] }) })
