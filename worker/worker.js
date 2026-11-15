@@ -194,6 +194,7 @@ export default {
         "\nTelefon: " + String(m.phone || "").slice(0, 30) + "\nWhatsApp: " + String(m.wa || "").slice(0, 80);
     }
 
+    try { const kr = await fetch("https://iam-power-academy.github.io/mimoza-ai/mimoza-ai-faq.md", { cf: { cacheTtl: 300, cacheEverything: true } }); if (kr.ok) system += "\n\n" + (await kr.text()).slice(0, 12000); } catch (e) {}
     system += "\n\nRREGULL FINAL: nëse pyet për oferta, çmime ose çfarë kemi, MOS i radhit të gjitha paketat; propozo vetëm NJË kurs (emri, çmimi i ofertës, çmimi normal, lidhja) dhe pyet çfarë i duhet.";
     let text = "";
     if (env.AI) {
