@@ -68,8 +68,15 @@
     try { localStorage.setItem("mz_turn", String(turn)); } catch (e) {}
     return m;
   }
+  // Çdo bisedë ka një anëtar skuadre (radhë), që shfaqet te çdo përgjigje.
+  var member = null;
+  function convMember() { if (!member) member = nextMember(); return member; }
+  function teamLine() {
+    var m = convMember();
+    return "\n\nPër ndihmë direkt flet me " + m.name + " nga skuadra jonë: " + m.phone + " · " + m.wa;
+  }
   function fallback() {
-    var m = nextMember();
+    var m = convMember();
     return "Këtë pyetje po ta lidh menjëherë me " + m.name + " nga skuadra jonë, që të përgjigjet saktë:\n" + m.phone + "\n" + m.wa;
   }
 
@@ -84,6 +91,51 @@
   var CRISIS = "Më vjen keq që po kalon kaq vështirë, dhe mirë që e the. Shëndeti dhe siguria jote vijnë para çdo gjëje tjetër.\n\n" +
     "Të lutem telefono tani 112 (urgjenca) ose shko te mjeku më i afërt, dhe thuaji një personi të afërt që të rrijë me ty. Mos qëndro vetëm.\n\n" +
     "IAM Power nuk është shërbim mjekësor apo psikologjik dhe nuk mund ta zëvendësojë ndihmën urgjente profesionale.";
+
+  // Përgjigje të drejtpërdrejta për pyetjet e zakonshme (vetëm nga informacioni i faqes).
+  var P = {
+    money: "Për çështje parash, Pako 1 \"Paratë Rrjedhin\" (ofertë 20 €, normal 29 €) ka 3 kurse: dy për çlirimin e bllokimeve të parave dhe një për të qenë i lirë nga problemet e parave përgjithmonë, me qasje 5 vjet.\nhttps://iampower.al/product/parate-rrjedhin/\n\nNëse dëshiron më thellë vetëbesimin dhe mentalitetin e pasurisë, ka \"Fuqia Brenda Teje\" (240 €, 18 kurse): https://iampower.al/product/fuqia-brenda-teje/\n\nRezultati varet nga angazhimi yt, nuk ka garanci. A po fillon nga e para me paratë, apo ke punuar më parë me veten?",
+    emo: "Për emocionet dhe mendimet, Pako 2 \"Masterclass IAM Power\" (ofertë 69 €, normal 99 €) ka kursin Paketa 1 për menaxhimin e emocioneve e mendimeve (81 mësime) plus \"Deklaroni fuqinë tuaj\", qasje 1 vit dhe Zoom live dy herë në muaj me Mimozën.\nhttps://iampower.al/product/masterclass-iam-power/\n\nNëse do ta ecësh rrugën hap pas hapi me Mimozën, Pako 3 \"40 Ditë Çlirim Shpirtëror\" (ofertë 105 €, normal 150 €) ka programin 40-ditor, Nivelin I dhe Paketën 1.\nhttps://iampower.al/product/40-dite-clirim-shpirteror/\n\nCila të duket më afër: të mësosh vetë në ritmin tënd, apo me program 40-ditor?",
+    self: "Për vetëbesimin dhe besimet kufizuese, \"Fuqia Brenda Teje\" (ofertë 240 €, normal 349 €) ka 18 kurse mbi vetëbesimin, besimet kufizuese dhe mentalitetin e pasurisë, qasje 5 vjet.\nhttps://iampower.al/product/fuqia-brenda-teje/\n\nNëse do të nisësh me diçka të vogël, Pako 1 \"Paratë Rrjedhin\" kushton 20 € sot. Çfarë ndjen se të ndalon më shumë?",
+    calm: "Për qetësi, meditim dhe shërim të brendshëm, \"Qetësia e Shpirtit\" (ofertë 275 €, normal 397 €) ka 16 kurse mbi meditimin, shërimin e brendshëm dhe praktikën e përditshme, qasje 5 vjet.\nhttps://iampower.al/product/qetesia-e-shpirtit/\n\nNë faqe ka edhe një meditim falas. Ke më shumë dëshirë për meditim, apo për një program me udhëzim hap pas hapi?",
+    biz: "Për biznes, \"Biznesi Yt\" (ofertë 485 €, normal 697 €) ka 10 kurse mbi fillimin dhe rritjen e biznesit, shitjet dhe mentalitetin, qasje 5 vjet.\nhttps://iampower.al/product/biznesi-yt/\n\nA po e fillon biznesin, apo e ke dhe do ta rritësh?",
+    coach: "Për certifikim, \"Life Coach i Certifikuar · Porta 01\" (ofertë 720 €, normal 800 €) përfshin Nivelet 1–4, Motivational Trainer, Public Trainer dhe seanca 1:1, plus certifikatë IAM Power. Qasja është e përhershme, me 6 muaj online.\nhttps://iampower.al/product/life-coach-i-certifikuar-%c2%b7-porta-01/\n\nPër Arkitektin e Universit 1:1 me Mimozën duhet aplikim: https://iampower.al/aplikim-arkitekti-i-universit/ (nga 1,200 €). A të intereson të bëhesh coach vetë?",
+    arch: "Arkitekti i Universit është puna 1:1 personale me Mimozën, me Nivelin V dhe Nivelin 6, nga 1,200 €, vetëm me aplikim:\nhttps://iampower.al/aplikim-arkitekti-i-universit/\n\nBonus 27–29 nëntor: kush pranohet merr falas kursin Life Coach i Certifikuar (vlerë 800 €), vetëm 10 vende.",
+    access: "Qasja sipas paketës: Paratë Rrjedhin 5 vjet, Masterclass IAM Power 1 vit, 40 Ditë Çlirim Shpirtëror 40 ditë program plus 5 vjet qasje, pakot e thella (Fuqia Brenda Teje, Qetësia e Shpirtit, Biznesi Yt) 5 vjet, Life Coach i Certifikuar e përhershme me 6 muaj online.",
+    live: "Zoom live me Mimozën dy herë në muaj përfshihet te Pako 2 \"Masterclass IAM Power\". Datat e sakta nuk i kam të publikuara, prandaj skuadra të tregon kur është takimi i radhës.",
+    who: "Jam Mimoza AI, asistentja virtuale e IAM Power Academy. Nuk jam Mimoza personalisht, por të ndihmoj të gjesh paketën e duhur dhe të lidh me skuadrën për çdo gjë tjetër.",
+    hi: "Përshëndetje! Çfarë po kërkon ose çfarë dëshiron të ndryshosh tani?",
+    thx: "Me kënaqësi! Nëse ke ndonjë pyetje tjetër, jam këtu."
+  };
+  var RULES = [
+    [/k[eë]st|me rata|paguaj.*pjes|pjes[eë]-pjes[eë]/i, "TEAM"],
+    [/cmim|sa kushton|kushtoj|oferte|black friday|paket|kurset/, "OFFERS"],
+    [/regjistr|si blej|si e blej|si paguaj|blej|bli /, "REGISTER"],
+    [/falas|pa pages|provoj|prove/, "FREE"],
+    [/\bpara\b|parat|borxh|financ|pasur|te ardhura|rrjedh/, P.money],
+    [/vetebesim|besim|vler[eë] per veten|kufizu/, P.self],
+    [/emocion|mendim|zemerim|frik|nervoz|vetmi|lodhj|stres/, P.emo],
+    [/meditim|qetesi|paqe|shpirt|shereim|brendshem/, P.calm],
+    [/biznes|shitj|ndermarrj|karrier/, P.biz],
+    [/arkitekt|1:1|individual|seanc/, P.arch],
+    [/coach|certifik|trajner/, P.coach],
+    [/sa kohe|qasj|afat|sa zgjat|vlen per/, P.access],
+    [/zoom|live|takim/, P.live],
+    [/kush je|je robot|je njeri|je ai\b|je vertet/, P.who],
+    [/^(pershendetje|tung|miredita|mirdita|mire\b|hello|hi\b|hey)/, P.hi],
+    [/faleminderit|rrofsh|flm|thx/, P.thx]
+  ];
+  function norm(t) { return t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function smart(text) {
+    var n = norm(text);
+    for (var i = 0; i < RULES.length; i++) {
+      if (RULES[i][0].test(n)) {
+        var r = RULES[i][1];
+        return r === "OFFERS" ? OFFERS : r === "REGISTER" ? REGISTER : r === "FREE" ? FREE : r === "TEAM" ? TEAM : r;
+      }
+    }
+    return null;
+  }
 
   var root = document.getElementById("mz-root");
   root.innerHTML =
@@ -107,6 +159,7 @@
     msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
   }
   function bot(text) { history.push({ role: "assistant", content: text }); add("bot", text); }
+  function botT(text) { bot(text.indexOf("wa.me/") > -1 && text.indexOf(convMember().wa) > -1 ? text : text + teamLine()); }
 
   function quick() {
     q.innerHTML = "";
@@ -119,28 +172,31 @@
 
   function handle(key, label) {
     add("user", label); history.push({ role: "user", content: label });
-    if (key === "match") bot("Me kënaqësi! Tregomë me fjalët e tua: çfarë po të bllokon ose çfarë dëshiron të ndryshosh tani (para, emocione, vetëbesim, qetësi, biznes, certifikim)? Sipas asaj që më thua, të tregoj cila paketë të përshtatet.");
-    else if (key === "offers") bot(OFFERS);
-    else if (key === "reg") bot(REGISTER);
+    if (key === "match") botT("Me kënaqësi! Tregomë me fjalët e tua: çfarë po të bllokon ose çfarë dëshiron të ndryshosh tani (para, emocione, vetëbesim, qetësi, biznes, certifikim)? Sipas asaj që më thua, të tregoj cila paketë të përshtatet.");
+    else if (key === "offers") botT(OFFERS);
+    else if (key === "reg") botT(REGISTER);
     else if (key === "installments") bot(TEAM);
-    else if (key === "free") bot(FREE);
+    else if (key === "free") botT(FREE);
     else bot(fallback());
   }
 
   function ask(text) {
     add("user", text); history.push({ role: "user", content: text });
     if (CRISIS_RE.test(text)) { bot(CRISIS); return; }
-    if (SENSITIVE_RE.test(text)) { bot(NOTICE); return; }
-    if (!CONFIG.endpoint) { bot(/k[eë]st|me rata|paguaj.*pjes/i.test(text) ? TEAM : fallback()); return; }
+    if (SENSITIVE_RE.test(text)) { botT(NOTICE); return; }
+    if (!CONFIG.endpoint) {
+      var a = smart(text);
+      if (a === TEAM) bot(TEAM); else if (a) botT(a); else bot(fallback());
+      return;
+    }
     var wait = document.createElement("div"); wait.className = "mz-m mz-b"; wait.textContent = "…"; msgs.appendChild(wait);
-    fetch(CONFIG.endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history.slice(-12), nextMember: MEMBERS[turn % MEMBERS.length] }) })
+    fetch(CONFIG.endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history.slice(-12), nextMember: convMember() }) })
       .then(function (r) { return r.json(); })
       .then(function (d) {
         wait.remove();
         var reply = (d && d.reply) || fallback();
         if (reply.indexOf("[LIDH_ME_SKUADREN]") > -1) {
           reply = reply.replace("[LIDH_ME_SKUADREN]", "").trim();
-          nextMember(); // radha ecën para pyetjes tjetër
         }
         if (reply.indexOf("[GATI_PER_BLERJE]") > -1) {
           reply = reply.replace("[GATI_PER_BLERJE]", "").trim();
@@ -148,7 +204,7 @@
             try { fetch(CONFIG.notifyUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ event: "gati_per_blerje", page: location.href, transcript: history.slice(-12) }) }); } catch (e) {}
           }
         }
-        bot(reply);
+        botT(reply);
       })
       .catch(function () { wait.remove(); bot(fallback()); });
   }
