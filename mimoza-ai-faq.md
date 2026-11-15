@@ -64,3 +64,9 @@ Kursi "Life Coach i Certifikuar · Porta 01" jep certifikatë IAM Power. Për pa
 
 **Dëshmi nga pjesëmarrës?**
 Faqja kryesore iampower.al ka video dëshmish nga pjesëmarrës. Mos shpik dëshmi të tjera.
+
+**Çfarë është falas dhe ku e marr? (lidhje të verifikuara në faqe, 15.11.2026)**
+Dy kurse falas, vetëm me regjistrim/kyçje (pa pagesë):
+- Niveli 0, nisja jote në IAM Power (sfidë 21-ditore dhe module vetëzhvillimi): https://iampower.al/courses/trajnimet-falas-per-vetezhvillim/
+- Meditimi 21-ditor, Pjesa 1: https://iampower.al/courses/meditoni-relaksoheni-dhe-sheroheni-falas/
+Llogari e re: https://iampower.al/regjistrimi/ · Kyçu: https://iampower.al/logohu/. Kjo zëvendëson çdo udhëzim tjetër për lidhjet falas. Mos jep lidhje për meditime që lidhen me depresionin si "falas".

@@ -27,7 +27,10 @@
     "4. Arkitekti i Universit nuk blihet direkt, vetëm me aplikim: https://iampower.al/aplikim-arkitekti-i-universit/\n\n" +
     "Një klikim në WhatsApp nuk është regjistrim i përfunduar. Për pyetje: " + CONFIG.whatsapp;
 
-  var FREE = "Falas mund të marrësh Nivelin 0 dhe një meditim, pa pagesë. Gjeje në https://iampower.al/ ose më shkruaj në WhatsApp " + CONFIG.whatsapp + " dhe ekipi ta dërgon.\n\nNë cilën fushë do ta ndiesh veten më të bllokuar tani?";
+  var FREE = "Falas ke dy mundësi, vetëm me regjistrim (pa pagesë):\n\n" +
+    "• Niveli 0, nisja jote në IAM Power (përfshin sfidën 21-ditore dhe module për vetëzhvillim):\nhttps://iampower.al/courses/trajnimet-falas-per-vetezhvillim/\n\n" +
+    "• Meditimi 21-ditor (Pjesa 1):\nhttps://iampower.al/courses/meditoni-relaksoheni-dhe-sheroheni-falas/\n\n" +
+    "Nëse nuk ke llogari, regjistrohu këtu: https://iampower.al/regjistrimi/\n\nNë cilën fushë do ta ndiesh veten më të bllokuar tani?";
 
   var TEAM = "Për pagesë me këste flet me një anëtar të skuadrës sonë, që ta rregullojë me ty. Zgjidh sipas vendit ku jeton:\n\n" +
     "• Shqipëri: Anila +355 67 615 1349 https://wa.me/355676151349\n" +

@@ -128,7 +128,7 @@ Për Zvicër, Gjermani, Maqedoni të Veriut dhe vende të tjera: jep Anilën ose
 
 **Bonus (vetëm 27–29 nëntor):** ata që pranohen te Arkitekti i Universit marrin falas kursin Life Coach i Certifikuar (vlerë 800 €). Vetëm 10 vende, vetëm me aplikim.
 
-**Falas:** Niveli 0 dhe një meditim, pa pagesë. Lidhjet "Merr falas" në faqe nuk çojnë në adresë specifike; dërgoje klientin te https://iampower.al/ ose te ekipi në WhatsApp.
+**Falas:** Niveli 0 dhe një meditim, pa pagesë. Lidhjet e vërteta (vetëm me regjistrim): Niveli 0 https://iampower.al/courses/trajnimet-falas-per-vetezhvillim/ · Meditimi 21-ditor https://iampower.al/courses/meditoni-relaksoheni-dhe-sheroheni-falas/
 
 **Trajnim i veçantë:** "Largoni plagët emocionale – vlerësoni veten", trajnim 1-vjeçar, çmimi nuk shfaqet: https://iampower.al/trajnim-1-vjecar-largoni-plaget-emocionale-vleresoni-veten/
 
@@ -144,5 +144,4 @@ Për Zvicër, Gjermani, Maqedoni të Veriut dhe vende të tjera: jep Anilën ose
 ## ÇËSHTJE TË HAPURA PËR MIMOZËN
 
 - Çmimet "ofertë" (20, 69, 105, 240, 275, 485, 720 €) lidhen me kohëmatësin e Black Friday në faqe, që shfaq "--". A janë ato çmimet aktuale tani, apo vlejnë vetëm në një periudhë? Deri sa ta konfirmosh, AI i quan "çmimi i ofertës sipas faqes".
-- Lidhjet "Merr falas" nuk kanë adresë; duhet dhënë një lidhje e vërtetë për Nivelin 0 dhe meditimin.
 - Çmimi i trajnimit 1-vjeçar "Largoni plagët emocionale" mungon.
