@@ -184,8 +184,13 @@
     add("user", text); history.push({ role: "user", content: text });
     if (CRISIS_RE.test(text)) { bot(CRISIS); return; }
     if (SENSITIVE_RE.test(text)) { botT(NOTICE); return; }
+    var exact = smart(text);
+    if (CONFIG.endpoint && (exact === OFFERS || exact === REGISTER || exact === FREE || exact === TEAM)) {
+      if (exact === TEAM) bot(TEAM); else botT(exact);
+      return;
+    }
     if (!CONFIG.endpoint) {
-      var a = smart(text);
+      var a = exact;
       if (a === TEAM) bot(TEAM); else if (a) botT(a); else bot(fallback());
       return;
     }

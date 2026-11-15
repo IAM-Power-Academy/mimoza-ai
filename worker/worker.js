@@ -168,7 +168,7 @@ export default {
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     if (request.method !== "POST") return json({ error: "method" }, 405, cors);
     if (ALLOWED.indexOf(origin) === -1) return json({ error: "origin" }, 403, cors);
-    if (!env.ANTHROPIC_API_KEY) return json({ error: "no_key" }, 500, cors);
+    if (!env.AI && !env.ANTHROPIC_API_KEY) return json({ error: "no_model" }, 500, cors);
 
     // Kufi: 20 kërkesa për 10 minuta për IP
     const ip = request.headers.get("CF-Connecting-IP") || "x";
@@ -193,17 +193,31 @@ export default {
         "\nTelefon: " + String(m.phone || "").slice(0, 30) + "\nWhatsApp: " + String(m.wa || "").slice(0, 80);
     }
 
-    let r;
-    try {
-      r = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "x-api-key": env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
-        body: JSON.stringify({ model: env.MODEL || MODEL_DEFAULT, max_tokens: 700, system: system, messages: msgs })
-      });
-    } catch (e) { return json({ error: "upstream" }, 502, cors); }
-    if (!r.ok) return json({ error: "model", status: r.status }, 502, cors);
-    const data = await r.json();
-    const text = (data.content || []).filter(function (c) { return c.type === "text"; }).map(function (c) { return c.text; }).join("\n").trim();
+    let text = "";
+    if (env.AI) {
+      // Workers AI (falas brenda kufirit ditor të Cloudflare, pa çelës)
+      try {
+        const out = await env.AI.run(env.AI_MODEL || "@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+          messages: [{ role: "system", content: system }].concat(msgs),
+          max_tokens: 500,
+          temperature: 0.3
+        });
+        text = String((out && (out.response || out.result)) || "").trim();
+      } catch (e) { return json({ error: "ai" }, 502, cors); }
+    } else {
+      let r;
+      try {
+        r = await fetch("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-api-key": env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
+          body: JSON.stringify({ model: env.MODEL || MODEL_DEFAULT, max_tokens: 700, system: system, messages: msgs })
+        });
+      } catch (e) { return json({ error: "upstream" }, 502, cors); }
+      if (!r.ok) return json({ error: "model", status: r.status }, 502, cors);
+      const data = await r.json();
+      text = (data.content || []).filter(function (c) { return c.type === "text"; }).map(function (c) { return c.text; }).join("\n").trim();
+    }
+    if (!text) return json({ error: "empty" }, 502, cors);
     return json({ reply: text }, 200, cors);
   }
 };
