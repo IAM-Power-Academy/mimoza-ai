@@ -9,7 +9,7 @@
   var CONFIG = {
     // Adresa e shërbimit që thërret modelin. Lëre bosh për modalitetin pa AI.
     // Pret POST {messages:[{role,content}]} dhe kthen {reply:"..."}.
-    endpoint: "",
+    endpoint: "https://mimoza-ai.unejamfuqia.workers.dev",
     whatsapp: "https://wa.me/38976432315",
     email: "info@iampower.al",
     // Opsionale: adresa ku dërgohet njoftimi kur klienti është gati për blerje.
