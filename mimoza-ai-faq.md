@@ -74,3 +74,6 @@ Llogari e re: https://iampower.al/regjistrimi/ · Kyçu: https://iampower.al/log
 **A keni kurs për prindërimin, fëmijët ose adoleshentët? (konfirmuar nga Mimoza)**
 Po. Kursi i prindërimit gjendet brenda "Paketa 1: Menaxhimi i emocioneve dhe mendimeve në jetën tuaj", që përfshihet te Pako 2 "Masterclass IAM Power" (69 € ofertë, normal 99 €, qasje 1 vit, Zoom live 2 herë në muaj me Mimozën): https://iampower.al/product/masterclass-iam-power/ dhe te Pako 3 "40 Ditë Çlirim Shpirtëror" (105 € ofertë, normal 150 €): https://iampower.al/product/40-dite-clirim-shpirteror/
 Mos shpik detaje për përmbajtjen e saktë të prindërimit; thuaj vetëm që është brenda kësaj pakete dhe pyet çfarë e shqetëson më shumë. Mos e ofro programin "365 Ditë" ose çmimin 188 €.
+
+**Përmbajtja e prindërimit (nga faqja e kursit "Paketa 1", 18.11.2026)**
+Brenda Paketa 1 është Programi 01 "Dashuri pa Frikë", me 10 module për prindërimin, nga Mimoza dhe Avni Thaqi. Temat që faqja i liston: dashuria pa kushte, komunikimi prind-fëmijë, plagët emocionale, kufijtë e shëndetshëm, respekti dhe mirëkuptimi, ndryshimi i modeleve familjare. Faqja nuk përmend adoleshentët; mos premto përmbajtje specifike për ta. Paketa 1 përfshin edhe programe të tjera (Më e Fortë se Kurrë, Mrekulli Vazhdimisht, Gruaja Perfekte, Zemra e Martesës, Fuqia e Imagjinatës Pozitive) dhe Zoom live 2 herë në muaj.
