@@ -96,6 +96,7 @@
     live: "Zoom live me Mimozën dy herë në muaj përfshihet te Pako 2 \"Masterclass IAM Power\". Datat e sakta nuk i kam të publikuara, prandaj skuadra të tregon kur është takimi i radhës.",
     who: "Jam Mimoza AI, asistentja virtuale e IAM Power Academy. Nuk jam Mimoza personalisht, por të ndihmoj të gjesh paketën e duhur dhe të lidh me skuadrën për çdo gjë tjetër.",
     hi: "Përshëndetje! Çfarë po kërkon ose çfarë dëshiron të ndryshosh tani?",
+    parent: "Po, kursi i prindërimit gjendet brenda \"Paketa 1: Menaxhimi i emocioneve dhe mendimeve\", që përfshihet te Masterclass IAM Power (ofertë 69 €, normal 99 €, qasje 1 vit, Zoom live 2 herë në muaj me Mimozën):\nhttps://iampower.al/product/masterclass-iam-power/\n\nPo ashtu edhe te 40 Ditë Çlirim Shpirtëror (ofertë 105 €, normal 150 €):\nhttps://iampower.al/product/40-dite-clirim-shpirteror/\n\nÇfarë të shqetëson më shumë me fëmijët ose adoleshentët?",
     thx: "Me kënaqësi! Nëse ke ndonjë pyetje tjetër, jam këtu.",
     info: "Me kënaqësi! Tregomë me fjalët e tua çfarë po të bllokon ose çfarë dëshiron të ndryshosh tani (para, emocione, vetëbesim, qetësi, biznes, certifikim), dhe të propozoj një kurs që të përshtatet."
   };
@@ -104,6 +105,7 @@
     [/cmim|sa kushton|kushtoj|ofert|zbritj|black friday|paket|kurset|aktual/, "OFFERS"],
     [/regjistr|si blej|si e blej|si paguaj|blej|bli /, "REGISTER"],
     [/falas|pa pages|provoj|prove/, "FREE"],
+    [/prinder|femij|adoleshent|prindi/, P.parent],
     [/\bpara\b|parat|borxh|financ|pasur|te ardhura|rrjedh/, P.money],
     [/vetebesim|besim|vler[eë] per veten|kufizu/, P.self],
     [/emocion|mendim|zemerim|frik|nervoz|vetmi|lodhj|stres/, P.emo],

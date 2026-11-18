@@ -70,3 +70,7 @@ Dy kurse falas, vetëm me regjistrim/kyçje (pa pagesë):
 - Niveli 0, nisja jote në IAM Power (sfidë 21-ditore dhe module vetëzhvillimi): https://iampower.al/courses/trajnimet-falas-per-vetezhvillim/
 - Meditimi 21-ditor, Pjesa 1: https://iampower.al/courses/meditoni-relaksoheni-dhe-sheroheni-falas/
 Llogari e re: https://iampower.al/regjistrimi/ · Kyçu: https://iampower.al/logohu/. Kjo zëvendëson çdo udhëzim tjetër për lidhjet falas. Mos jep lidhje për meditime që lidhen me depresionin si "falas".
+
+**A keni kurs për prindërimin, fëmijët ose adoleshentët? (konfirmuar nga Mimoza)**
+Po. Kursi i prindërimit gjendet brenda "Paketa 1: Menaxhimi i emocioneve dhe mendimeve në jetën tuaj", që përfshihet te Pako 2 "Masterclass IAM Power" (69 € ofertë, normal 99 €, qasje 1 vit, Zoom live 2 herë në muaj me Mimozën): https://iampower.al/product/masterclass-iam-power/ dhe te Pako 3 "40 Ditë Çlirim Shpirtëror" (105 € ofertë, normal 150 €): https://iampower.al/product/40-dite-clirim-shpirteror/
+Mos shpik detaje për përmbajtjen e saktë të prindërimit; thuaj vetëm që është brenda kësaj pakete dhe pyet çfarë e shqetëson më shumë. Mos e ofro programin "365 Ditë" ose çmimin 188 €.
